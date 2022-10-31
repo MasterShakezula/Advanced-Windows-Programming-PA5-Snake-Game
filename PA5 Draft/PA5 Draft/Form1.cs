@@ -13,8 +13,11 @@ namespace PA5_Draft
     public partial class MainForm : Form
     {
         private int Step = 1;
+        private int OPACITY = 255;
+        private Boolean GameOver = false;
         private readonly SnakeGame Game;
-        private int NumberOfApples = 1;
+        //gamever boolean make later
+        private int NumberOfApples = 1; //let the use change this value, make an options menu form.
         public MainForm()
         {
             InitializeComponent();
@@ -27,13 +30,18 @@ namespace PA5_Draft
 
         private void Game_HitWallAndLose()
         {
+            //use game over boolean here
             mainTimer.Stop();
             Field.Refresh();
+            Field.Invalidate();
         }
         private void Game_HitSnakeAndLose()
         {
+            //use game over here
+
             mainTimer.Stop();
             Field.Refresh();
+            
         }
 
         private void Game_EatAndGrow()
@@ -66,6 +74,7 @@ namespace PA5_Draft
                     g.DrawLine(PenForSnake, new System.Drawing.Point((int)Body.Start.X, (int)Body.Start.Y)
                         , new System.Drawing.Point((int)Body.End.X, (int)Body.End.Y));
             }
+            //if gameover?....
         }
 
 
