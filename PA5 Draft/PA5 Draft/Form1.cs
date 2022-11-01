@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,25 @@ namespace PA5_Draft
         private int OPACITY = 255;
         private Boolean GameOver = false;
         private readonly SnakeGame Game;
+        
+        
+        
         //gamever boolean make later
-        private int NumberOfApples = 1; //let the use change this value, make an options menu form.
+        private int NumberOfApples; //let the user change this value, make an options menu form.
         public MainForm()
         {
+           OptionMenu Options = new OptionMenu();
+            
+           Options.ShowDialog();
+            //this.Enabled = true;
+            NumberOfApples = Options.getApples(); //Part 1 is finished with this line of code.
+
+            //Options.MdiParent = this;
+            //ActivateMdiChild(this);
             InitializeComponent();
+            
             Game = new SnakeGame(new System.Drawing.Point((Field.Width - 20) / 2, Field.Height / 2), 40, NumberOfApples, Field.Size);
+
             Field.Image = new Bitmap(Field.Width, Field.Height);
             Game.EatAndGrow += Game_EatAndGrow;
             Game.HitWallAndLose += Game_HitWallAndLose;
@@ -97,5 +111,9 @@ namespace PA5_Draft
                     break;
             }
         }
+
+        
+
+        
     }
 }
