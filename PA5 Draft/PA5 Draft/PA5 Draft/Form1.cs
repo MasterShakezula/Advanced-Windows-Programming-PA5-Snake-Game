@@ -12,12 +12,13 @@ namespace PA5_Draft
 {
     public partial class MainForm : Form
     {
-        private int Step = 1;
+        private int Step = 1; //speed of the snake
         private readonly SnakeGame Game;
         private int OPACITY = 255;
         private Boolean GameOver = false;
         private int NumberOfApples; //apples seen on screen at all times
         private int applesEaten = 0;
+        //private Image applePic = '@apple.png'; //ask about this 
         public MainForm()
         {
             OptionsMenu Options = new OptionsMenu();
@@ -49,7 +50,11 @@ namespace PA5_Draft
 
         private void Game_EatAndGrow()
         {
-            applesEaten++; //you can only eat 1 apple at a time of course
+            ++applesEaten; //you can only eat 1 apple at a time of course
+            if (applesEaten % 10 == 0 && Step != 10) Step++;
+            //increase snakes speed by 1 for every 10 apples, maxing out at 10
+
+            
         }
 
         private void MainTimer_Tick(object sender, EventArgs e)
@@ -79,7 +84,7 @@ namespace PA5_Draft
                 if (GameOver)
                 {
                     
-                    g.DrawString("Sorry Loser. You lost and only ate " + applesEaten + " apples dumbass.", DefaultFont, AppleBrush, RectangleToScreen(new Rectangle(0, 0, Field.Width, Field.Height))); //test...
+                    g.DrawString("Sorry Loser. You lost and only ate " + applesEaten + " apples.", DefaultFont, AppleBrush, RectangleToScreen(new Rectangle(0, 0, Field.Width, Field.Height))); 
                 }
             }
             
