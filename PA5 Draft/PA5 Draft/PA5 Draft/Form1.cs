@@ -16,7 +16,8 @@ namespace PA5_Draft
         private readonly SnakeGame Game;
         private int OPACITY = 255;
         private Boolean GameOver = false;
-        private int NumberOfApples;
+        private int NumberOfApples; //apples seen on screen at all times
+        private int applesEaten = 0;
         public MainForm()
         {
             OptionsMenu Options = new OptionsMenu();
@@ -34,19 +35,21 @@ namespace PA5_Draft
 
         private void Game_HitWallAndLose()
         { // use game over here
+            GameOver = true;
             mainTimer.Stop();
             Field.Refresh();
         }
         private void Game_HitSnakeAndLose()
         {
             // use game over here
+            GameOver = true;
             mainTimer.Stop();
             Field.Refresh();
         }
 
         private void Game_EatAndGrow()
         {
-            
+            applesEaten++; //you can only eat 1 apple at a time of course
         }
 
         private void MainTimer_Tick(object sender, EventArgs e)
@@ -73,7 +76,13 @@ namespace PA5_Draft
                 foreach (LineSeg Body in Game.SnakeBody)
                     g.DrawLine(PenForSnake, new System.Drawing.Point((int)Body.Start.X, (int)Body.Start.Y)
                         , new System.Drawing.Point((int)Body.End.X, (int)Body.End.Y));
+                if (GameOver)
+                {
+                    
+                    g.DrawString("Sorry Loser. You lost and only ate " + applesEaten + " apples dumbass.", DefaultFont, AppleBrush, RectangleToScreen(new Rectangle(0, 0, Field.Width, Field.Height))); //test...
+                }
             }
+            
         }
 
 
