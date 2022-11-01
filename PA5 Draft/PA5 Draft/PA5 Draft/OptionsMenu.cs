@@ -10,35 +10,28 @@ using System.Windows.Forms;
 
 namespace PA5_Draft
 {
-    public partial class OptionMenu : Form
+    public partial class OptionsMenu : Form
     {
         private int appleNumber;
-        
-        public OptionMenu()
+        public OptionsMenu()
         {
             InitializeComponent();
             appleNumber = (int)numericUpDown1.Value;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Exit(); //cancel
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            //new MainForm();
-            this.Close(); //OK
-
+            Application.Exit(); // cancel
         }
+
         public int getApples()
         {
-            return appleNumber; //getter method for ease of understanding
+            return appleNumber;
         }
 
-        private void OptionMenu_Load(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)

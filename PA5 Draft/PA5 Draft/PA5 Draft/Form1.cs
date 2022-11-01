@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,28 +13,19 @@ namespace PA5_Draft
     public partial class MainForm : Form
     {
         private int Step = 1;
+        private readonly SnakeGame Game;
         private int OPACITY = 255;
         private Boolean GameOver = false;
-        private readonly SnakeGame Game;
-        
-        
-        
-        //gamever boolean make later
-        private int NumberOfApples; //let the user change this value, make an options menu form.
+        private int NumberOfApples;
         public MainForm()
         {
-           OptionMenu Options = new OptionMenu();
-            
-           Options.ShowDialog();
+            OptionsMenu Options = new OptionsMenu();
+
+            Options.ShowDialog();
             //this.Enabled = true;
             NumberOfApples = Options.getApples(); //Part 1 is finished with this line of code.
-
-            //Options.MdiParent = this;
-            //ActivateMdiChild(this);
             InitializeComponent();
-            
             Game = new SnakeGame(new System.Drawing.Point((Field.Width - 20) / 2, Field.Height / 2), 40, NumberOfApples, Field.Size);
-
             Field.Image = new Bitmap(Field.Width, Field.Height);
             Game.EatAndGrow += Game_EatAndGrow;
             Game.HitWallAndLose += Game_HitWallAndLose;
@@ -43,19 +33,15 @@ namespace PA5_Draft
         }
 
         private void Game_HitWallAndLose()
-        {
-            //use game over boolean here
+        { // use game over here
             mainTimer.Stop();
             Field.Refresh();
-            Field.Invalidate();
         }
         private void Game_HitSnakeAndLose()
         {
-            //use game over here
-
+            // use game over here
             mainTimer.Stop();
             Field.Refresh();
-            
         }
 
         private void Game_EatAndGrow()
@@ -88,7 +74,6 @@ namespace PA5_Draft
                     g.DrawLine(PenForSnake, new System.Drawing.Point((int)Body.Start.X, (int)Body.Start.Y)
                         , new System.Drawing.Point((int)Body.End.X, (int)Body.End.Y));
             }
-            //if gameover?....
         }
 
 
@@ -111,9 +96,5 @@ namespace PA5_Draft
                     break;
             }
         }
-
-        
-
-        
     }
 }
