@@ -39,10 +39,12 @@
             // 
             this.Field.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Field.Location = new System.Drawing.Point(0, 0);
+            this.Field.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Field.Name = "Field";
-            this.Field.Size = new System.Drawing.Size(604, 581);
+            this.Field.Size = new System.Drawing.Size(897, 868);
             this.Field.TabIndex = 0;
             this.Field.TabStop = false;
+            this.Field.Click += new System.EventHandler(this.Field_Click);
             this.Field.Paint += new System.Windows.Forms.PaintEventHandler(this.Field_Paint);
             // 
             // mainTimer
@@ -53,13 +55,14 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 581);
+            this.ClientSize = new System.Drawing.Size(897, 868);
             this.Controls.Add(this.Field);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(620, 620);
-            this.MinimumSize = new System.Drawing.Size(620, 620);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximumSize = new System.Drawing.Size(919, 924);
+            this.MinimumSize = new System.Drawing.Size(919, 924);
             this.Name = "MainForm";
             this.Text = "Snakes";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Snakes_KeyDown);

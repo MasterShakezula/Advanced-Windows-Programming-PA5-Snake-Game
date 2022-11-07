@@ -18,6 +18,7 @@ namespace PA5_Draft
         private Boolean GameOver = false;
         private int NumberOfApples; //apples seen on screen at all times
         private int applesEaten = 0;
+        private bool paused = false;
         //private Image applePic = '@apple.png'; //ask about this 
         public MainForm()
         {
@@ -108,6 +109,21 @@ namespace PA5_Draft
                 case Keys.Right:
                     Game.Move(Step, Direction.RIGHT);
                     break;
+            }
+        }
+
+        private void Field_Click(object sender, EventArgs e)
+        {
+            // pause/unpause on click
+            if (!paused)
+            {
+                paused = true;
+                mainTimer.Stop();
+            }
+            else
+            {
+                paused = false;
+                mainTimer.Start();
             }
         }
     }
