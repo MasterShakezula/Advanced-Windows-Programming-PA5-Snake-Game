@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+
 
 namespace PA5_Draft
 {
@@ -19,10 +21,14 @@ namespace PA5_Draft
         private int NumberOfApples; //apples seen on screen at all times
         private int applesEaten = 0;
         private bool paused = false;
+        private SoundPlayer s, t, u;
         //private Image applePic = '@apple.png'; //ask about this 
         public MainForm()
         {
             OptionsMenu Options = new OptionsMenu();
+            s = new SoundPlayer(PA5_Draft.Properties.Resources.VOXScrm_Wilhelm_scream__ID_0477__BSB);
+            t = new SoundPlayer(PA5_Draft.Properties.Resources.Mario_Powerup);
+            u = new SoundPlayer(PA5_Draft.Properties.Resources.crash_6711);
 
             Options.ShowDialog();
             //this.Enabled = true;
@@ -37,24 +43,30 @@ namespace PA5_Draft
 
         private void Game_HitWallAndLose()
         { // use game over here
+            u.Play();
             GameOver = true;
             mainTimer.Stop();
             Field.Refresh();
+            
+            
         }
         private void Game_HitSnakeAndLose()
         {
             // use game over here
+            s.Play();
             GameOver = true;
             mainTimer.Stop();
             Field.Refresh();
+            
         }
 
         private void Game_EatAndGrow()
         {
+            t.Play();
             ++applesEaten; //you can only eat 1 apple at a time of course
             if (applesEaten % 10 == 0 && Step != 10) Step++;
             //increase snakes speed by 1 for every 10 apples, maxing out at 10
-
+            
             
         }
 
