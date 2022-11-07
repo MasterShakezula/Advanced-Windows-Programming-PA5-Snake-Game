@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Media;
 
 
+
 namespace PA5_Draft
 {
     public partial class MainForm : Form
@@ -21,10 +22,12 @@ namespace PA5_Draft
         private int NumberOfApples; //apples seen on screen at all times
         private int applesEaten = 0;
         private bool paused = false;
-        private SoundPlayer s, t, u;
+        private SoundPlayer s, t, u; // to play sound effects
+        private Random r; // to help choose random opacity
         //private Image applePic = '@apple.png'; //ask about this 
         public MainForm()
         {
+            r = new Random();
             OptionsMenu Options = new OptionsMenu();
             s = new SoundPlayer(PA5_Draft.Properties.Resources.VOXScrm_Wilhelm_scream__ID_0477__BSB);
             t = new SoundPlayer(PA5_Draft.Properties.Resources.Mario_Powerup);
@@ -64,7 +67,13 @@ namespace PA5_Draft
         {
             t.Play();
             ++applesEaten; //you can only eat 1 apple at a time of course
-            if (applesEaten % 10 == 0 && Step != 10) Step++;
+            if (applesEaten % 10 == 0 && Step != 10)
+            {
+                Step++;
+                toolStripProgressBar1.Value++; 
+                // progress on the player's speed stat as they get apples
+                // 100 apples = max speed achieved
+            }
             //increase snakes speed by 1 for every 10 apples, maxing out at 10
             
             
@@ -81,13 +90,20 @@ namespace PA5_Draft
             Pen PenForObstacles = new Pen(Color.FromArgb(40,40,40),2);
             Pen PenForSnake = new Pen(Color.FromArgb(100, 100, 100), 2);
             Brush BackGroundBrush = new SolidBrush(Color.FromArgb(150, 250, 150));
-            Brush AppleBrush = new SolidBrush(Color.FromArgb(250, 50, 50));
+            Brush AppleBrush = new SolidBrush(Color.FromArgb(r.Next(100, 256), 250, 50, 50));
+            // random object to help choose opacity 
             using (Graphics g = Graphics.FromImage(Field.Image))
             {
                 g.FillRectangle(BackGroundBrush,new Rectangle(0,0,Field.Width,Field.Height));
                 foreach (Point Apple in Game.Apples)
+                
                     g.FillEllipse(AppleBrush, new Rectangle(Apple.X - SnakeGame.AppleSize / 2, Apple.Y - SnakeGame.AppleSize / 2,
                         SnakeGame.AppleSize, SnakeGame.AppleSize));
+                    
+
+                
+                    
+
                 foreach (LineSeg Obstacle in Game.Obstacles)
                     g.DrawLine(PenForObstacles, new System.Drawing.Point(Obstacle.Start.X, Obstacle.Start.Y)
                         , new System.Drawing.Point(Obstacle.End.X, Obstacle.End.Y));
