@@ -137,6 +137,15 @@ namespace PA5_Draft
                 case Keys.Right:
                     Game.Move(Step, Direction.RIGHT);
                     break;
+                case Keys.U:
+                    Step ++;
+                    break;
+                case Keys.D:
+                    if (Step > 1)
+                    {
+                        Step--;
+                    }
+                    break;
             }
         }
 
